@@ -148,3 +148,7 @@ We chose the **Google Gemini API** (specifically the **`gemini-2.5-flash`** mode
    * **dueDate**: An ISO date-time string calculated relative to the user's current date/time.
 4. **Strict JSON Parsing**: The prompt enforces a strict JSON template return structure. Once received, the backend strips any markdown wrapping and parses the text into a clean JSON object.
 5. **Autofill Frontend UI**: The frontend receives the response and automatically populates the form fields (Title, Priority, Estimate, Due Date) in real-time, allowing the user to simply review and submit the task.
+
+
+### Deploy project 
+https://task-flow-ebvq.vercel.app/
