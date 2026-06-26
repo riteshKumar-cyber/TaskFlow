@@ -10,19 +10,24 @@ Here is a visual overview of TaskFlow's core interfaces:
 
 ### 1. Symmetrical Login Page
 A clean, secure user authentication interface with a modern card layout and smooth entry transitions.
-![Login Page](./frontend/public/screenshots/login_page_1782493758545.png)
+![Login Page] <img width="810" height="656" alt="image" src="https://github.com/user-attachments/assets/166d6e0a-f928-47a6-921e-bd0d06b0be21" />
+
+
 
 ### 2. Analytical Dashboard
 Real-time productivity insights featuring stacked daily bar charts, workflow state donut charts, and actual vs. predictive effort line charts.
-![Dashboard](./frontend/public/screenshots/dashboard_page_1782493774370.png)
+![Dashboard]<img width="1907" height="862" alt="image" src="https://github.com/user-attachments/assets/cf5f15e9-2779-402c-a7dc-23405c9c5716" />
 
-### 3. Kanban Board View
+
+### 3.  Board View
 An interactive task management canvas split into columns (To Do, In Progress, Done) supporting fluid drag-and-drop actions.
-![Board View](./frontend/public/screenshots/board_view_1782493786353.png)
+![Board View]<img width="810" height="656" alt="Screenshot 2026-06-26 233322" src="https://github.com/user-attachments/assets/8040cc9e-72da-431f-bb01-0dbb86672655" />
+
 
 ### 4. Symmetrical Mobile Viewport
 A fully responsive grid layout showing cards, navigation, and metrics optimized for mobile screens.
-![Mobile View](./frontend/public/screenshots/mobile_view_1782493801400.png)
+![Mobile View]<img width="421" height="755" alt="image" src="https://github.com/user-attachments/assets/9fb4ebc1-3ed9-4fd1-9834-e9093fb0a9ad" />
+
 
 ---
 
