@@ -20,7 +20,7 @@ function Login({ onLoginSuccess, onNavigateToRegister }) {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "const API_URL = import.meta.env.VITE_API_URL;/api/auth/login",
         {
           email,
           password,
@@ -39,7 +39,7 @@ function Login({ onLoginSuccess, onNavigateToRegister }) {
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-          "Login Failed"
+        "Login Failed"
       );
     } finally {
       setLoading(false);

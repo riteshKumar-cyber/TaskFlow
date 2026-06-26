@@ -78,7 +78,7 @@ Follow these step-by-step instructions to clone, set up, and run both frontend a
    cp .env.example .env
    ```
 4. Open the `.env` file and populate it with your database connection URI, JWT secrets, Gemini API key, and Cloudinary credentials. (See [Environment Variable Setup](#env-variable-setup) below).
-5. Start the backend development server (runs on `http://localhost:5000` by default):
+5. Start the backend development server (runs on `const API_URL = import.meta.env.VITE_API_URL;` by default):
    ```bash
    npm run dev
    ```
