@@ -140,7 +140,7 @@ We chose the **Google Gemini API** (specifically the **`gemini-2.5-flash`** mode
 
 ### How the AI Feature Works
 1. **Task Detail Entry**: The user opens the "New Task" form, types a description in their language of choice (e.g., *"mujhe monday tak authentication api banani hai low priority pe"*), and clicks the **AI Suggest** button.
-2. **Backend Payload**: The client sends the description text along with the current date/time in ISO format to the backend route `/api/ai/suggest`.
+2. **Backend Payload**: The client sends the description text along with the current date/time in ISO format to the backend route `/apitaskflow-b.onrender.com/ai/suggest`.
 3. **Structured Prompting**: The backend creates a specific system instruction telling the AI to act as a project manager, parse the description, and output recommendations for:
    * **title**: A concise, professional title.
    * **priority**: Mapped to `Low`, `Medium`, or `High`.

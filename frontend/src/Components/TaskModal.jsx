@@ -54,7 +54,7 @@ function TaskModal({ isOpen, onClose, editingTask, onSave }) {
         "Content-Type": "application/json",
         ...(token && { "Authorization": `Bearer ${token}` })
       };
-      const response = await axios.post(`${BASE_URL}/ai/suggest`, {
+      const response = await axios.post(`${BASE_URL}taskflow-b.onrender.com/ai/suggest`, {
         description: newDesc,
         currentDate: new Date().toISOString()
       }, { headers });

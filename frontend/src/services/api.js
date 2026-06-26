@@ -112,7 +112,7 @@ export const taskAPI = {
 
   // AI Suggestion for Estimate
   getAIEstimate: async (title, description) => {
-    const res = await fetch(`${BASE_URL}/ai/suggest`, {
+    const res = await fetch(`${BASE_URL}taskflow-b.onrender.com/ai/suggest`, {
       method: "POST",
       headers: getHeaders(),
       body: JSON.stringify({ title, description })
