@@ -64,7 +64,7 @@ function BoardColumn({ column, tasks, onTaskDropped, onDeleteTask, onEditTask, o
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
-      className={`flex flex-col w-[85vw] sm:w-72 h-[calc(100vh-16rem)] md:h-[calc(100vh-12rem)] rounded-2xl p-4 transition-all duration-200 snap-center shrink-0 ${
+      className={`flex flex-col w-[88vw] sm:w-72 h-[460px] sm:h-[calc(100vh-16rem)] md:h-[calc(100vh-12rem)] rounded-2xl p-4 transition-all duration-200 snap-center shrink-0 ${
         isDragOver ? 'bg-slate-100/80 scale-[1.01] ring-2 ring-blue-500/20' : 'bg-slate-50'
       }`}
     >

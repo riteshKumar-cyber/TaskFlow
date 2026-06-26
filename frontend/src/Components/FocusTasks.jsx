@@ -72,13 +72,13 @@ function FocusTasks({ tasks = [], onEditTask }) {
   };
 
   return (
-    <div className="flex flex-col w-full lg:w-72 h-[calc(100vh-16rem)] md:h-[calc(100vh-12rem)] rounded-2xl p-4 bg-slate-50 shrink-0">
+    <div className="flex flex-col w-full lg:w-72 h-auto sm:h-[calc(100vh-16rem)] md:h-[calc(100vh-12rem)] rounded-2xl p-4 bg-slate-50 shrink-0">
       {/* Header aligned with BoardColumn layout */}
       <div className="flex flex-col mb-4 px-1 shrink-0">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             {/* Glowing / pulsing dot for priority tasks */}
-            <div className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse" />
+            <div className="w-2.5 h-2.5 rounded-full bg-rose-500" />
             <span className="font-bold text-slate-700 text-sm">🔥 Focus Tasks</span>
           </div>
           

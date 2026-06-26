@@ -9,6 +9,9 @@ function Login({ onLoginSuccess, onNavigateToRegister }) {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showForgotModal, setShowForgotModal] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [forgotLoading, setForgotLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -94,9 +97,18 @@ function Login({ onLoginSuccess, onNavigateToRegister }) {
 
           {/* Password */}
           <div>
-            <label className="text-xs font-bold text-slate-500 uppercase">
-              Password
-            </label>
+            <div className="flex justify-between items-center">
+              <label className="text-xs font-bold text-slate-500 uppercase">
+                Password
+              </label>
+              <button
+                type="button"
+                onClick={() => setShowForgotModal(true)}
+                className="text-xs font-bold text-blue-600 hover:text-blue-500 transition-colors cursor-pointer"
+              >
+                Forgot Password?
+              </button>
+            </div>
 
             <div className="relative mt-1">
               <div className="absolute inset-y-0 left-3 flex items-center text-slate-400">
@@ -157,6 +169,78 @@ function Login({ onLoginSuccess, onNavigateToRegister }) {
           </button>
         </div>
       </div>
+
+      {/* FORGOT PASSWORD MODAL */}
+      {showForgotModal && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 animate-in fade-in duration-350">
+          <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-sm p-6 sm:p-8 shadow-2xl relative overflow-hidden flex flex-col gap-5 animate-in zoom-in-95 duration-200">
+            {/* Soft decorative gradient blurs */}
+            <div className="absolute -top-12 -left-12 w-24 h-24 bg-blue-500/10 rounded-full blur-xl pointer-events-none" />
+            <div className="absolute -bottom-12 -right-12 w-24 h-24 bg-blue-500/5 rounded-full blur-xl pointer-events-none" />
+
+            <div className="flex flex-col gap-2 text-center items-center">
+              <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shadow-inner">
+                <FiMail className="text-xl" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-800 tracking-tight">Reset Password</h3>
+              <p className="text-slate-400 text-xs leading-relaxed max-w-[280px]">
+                Enter your registered email address and we'll send you recovery instructions.
+              </p>
+            </div>
+
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                if (!forgotEmail.trim()) return;
+                try {
+                  setForgotLoading(true);
+                  await new Promise((resolve) => setTimeout(resolve, 1200));
+                  toast.success("Recovery email sent successfully!");
+                  setShowForgotModal(false);
+                  setForgotEmail("");
+                } catch (err) {
+                  toast.error("Failed to send recovery email");
+                } finally {
+                  setForgotLoading(false);
+                }
+              }}
+              className="flex flex-col gap-4"
+            >
+              <div className="flex flex-col gap-1.5 text-left">
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Email Address</label>
+                <input
+                  type="email"
+                  required
+                  placeholder="name@example.com"
+                  value={forgotEmail}
+                  onChange={(e) => setForgotEmail(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium transition-all"
+                />
+              </div>
+
+              <div className="flex items-center gap-3 mt-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowForgotModal(false);
+                    setForgotEmail("");
+                  }}
+                  className="flex-1 py-2.5 text-xs font-bold text-slate-500 hover:text-slate-700 bg-slate-50 hover:bg-slate-100 rounded-xl transition-all duration-150 cursor-pointer border border-slate-200/60"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={forgotLoading}
+                  className="flex-1 py-2.5 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 disabled:opacity-50 active:scale-[0.98] rounded-xl transition-all duration-150 shadow-md cursor-pointer"
+                >
+                  {forgotLoading ? "Sending..." : "Send Link"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -71,7 +71,7 @@ function Navbar({ onNewTaskClick, onLogout, searchQuery, setSearchQuery, onLogoC
             className="h-8 w-auto max-w-none absolute left-0 top-0"
           />
         </div>
-        <span className="hidden sm:inline font-bold text-lg text-slate-800 tracking-tight">TaskFlow</span>
+        <span className="font-bold text-base sm:text-lg text-slate-800 tracking-tight">TaskFlow</span>
       </button>
 
       {/* Search Bar */}

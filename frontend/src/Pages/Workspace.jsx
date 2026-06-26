@@ -160,7 +160,7 @@ function Workspace({ onLogout, theme, toggleTheme }) {
             </div>
           ) : (
             <div className="flex-1 flex flex-col lg:flex-row gap-6 min-h-0 overflow-y-auto lg:overflow-hidden">
-              <div className="flex-1 overflow-x-auto min-w-0 lg:h-full pb-4">
+              <div className="w-full lg:flex-1 min-w-0 lg:h-full pb-4 shrink-0 lg:shrink">
                 <Boardview
                   tasks={filteredTasks}
                   onTaskDropped={handleTaskDropped}

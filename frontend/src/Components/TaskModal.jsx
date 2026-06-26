@@ -158,7 +158,7 @@ function TaskModal({ isOpen, onClose, editingTask, onSave }) {
             <input
               type="text"
               required
-              placeholder="e.g. Develop User API"
+              placeholder="Add task title"
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
               className="w-full bg-slate-50/50 border border-slate-200/80 text-slate-700 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500/80 transition-all duration-200 placeholder:text-slate-300 font-medium"
