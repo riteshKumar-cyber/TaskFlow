@@ -1,5 +1,5 @@
 // Backend Base URL
-const BASE_URL = "const API_URL = import.meta.env.VITE_API_URL;/api";
+const BASE_URL = `${import.meta.env.VITE_API_URL}/api`;
 
 // Helper function to get headers with the auth token
 const getHeaders = () => {
@@ -111,14 +111,14 @@ export const taskAPI = {
   },
 
   // AI Suggestion for Estimate
-  getAIEstimate: async (title, description) => {
-    const res = await fetch(`${BASE_URL}taskflow-b.onrender.com/ai/suggest`, {
-      method: "POST",
-      headers: getHeaders(),
-      body: JSON.stringify({ title, description })
-    });
-    return res.json();
-  },
+ getAIEstimate: async (title, description) => {
+  const res = await fetch(`${BASE_URL}/ai/suggest`, {
+    method: "POST",
+    headers: getHeaders(),
+    body: JSON.stringify({ title, description })
+  });
+  return res.json();
+},
 
   // Update Password
   updatePassword: async (passwordData) => {
