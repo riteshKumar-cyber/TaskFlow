@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import {
   FiUser,
   FiMail,
@@ -9,6 +8,7 @@ import {
 } from "react-icons/fi";
 import taskLogo from "../assets/tasklogo.png";
 import { toast } from "react-hot-toast";
+import { taskAPI } from "../services/api";
 
 function Register({
   onRegisterSuccess,
@@ -30,28 +30,29 @@ function Register({
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        "const API_URL = import.meta.env.VITE_API_URL;/api/auth/register",
-        {
-          name,
-          email,
-          password,
-        }
-      );
+      const data = await taskAPI.registerUser({
+        name,
+        email,
+        password,
+      });
 
-      localStorage.setItem(
-        "token",
-        res.data.token
-      );
+      if (data.token) {
+        localStorage.setItem(
+          "token",
+          data.token
+        );
 
-      toast.success(
-        "Account Created Successfully "
-      );
+        toast.success(
+          "Account Created Successfully "
+        );
 
-      onRegisterSuccess();
+        onRegisterSuccess();
+      } else {
+        throw new Error(data.message || "Registration Failed");
+      }
     } catch (error) {
       toast.error(
-        error.response?.data?.message ||
+        error.message ||
         "Registration Failed"
       );
     } finally {

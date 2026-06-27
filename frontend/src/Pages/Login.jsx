@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import taskLogo from "../assets/tasklogo.png";
 import { toast } from "react-hot-toast";
+import { taskAPI } from "../services/api";
 
 function Login({ onLoginSuccess, onNavigateToRegister }) {
   const [email, setEmail] = useState("");
@@ -19,26 +19,27 @@ function Login({ onLoginSuccess, onNavigateToRegister }) {
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        "const API_URL = import.meta.env.VITE_API_URL;/api/auth/login",
-        {
-          email,
-          password,
-        }
-      );
+      const data = await taskAPI.loginUser({
+        email,
+        password,
+      });
 
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem(
-        "user",
-        JSON.stringify(res.data)
-      );
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem(
+          "user",
+          JSON.stringify(data)
+        );
 
-      toast.success("Login Successful ");
+        toast.success("Login Successful ");
 
-      onLoginSuccess();
+        onLoginSuccess();
+      } else {
+        throw new Error(data.message || "Login Failed");
+      }
     } catch (error) {
       toast.error(
-        error.response?.data?.message ||
+        error.message ||
         "Login Failed"
       );
     } finally {

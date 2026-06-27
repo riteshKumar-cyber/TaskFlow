@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiX, FiPlus, FiEdit2 } from 'react-icons/fi';
-import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { taskAPI } from '../services/api';
 
 function TaskModal({ isOpen, onClose, editingTask, onSave }) {
   const [newTitle, setNewTitle] = useState('');
@@ -48,18 +48,11 @@ function TaskModal({ isOpen, onClose, editingTask, onSave }) {
     }
     setAiLoading(true);
     try {
-      const BASE_URL = import.meta.env.VITE_API_URL || "const API_URL = import.meta.env.VITE_API_URL;/api";
-      const token = localStorage.getItem("token");
-      const headers = {
-        "Content-Type": "application/json",
-        ...(token && { "Authorization": `Bearer ${token}` })
-      };
-      const response = await axios.post(`${BASE_URL}taskflow-b.onrender.com/ai/suggest`, {
-        description: newDesc,
-        currentDate: new Date().toISOString()
-      }, { headers });
+      const data = await taskAPI.getAIEstimate(
+        newDesc,
+        new Date().toISOString()
+      );
 
-      const data = response.data;
       if (data) {
         if (data.title) setNewTitle(data.title);
         if (data.priority) setNewPriority(data.priority);
