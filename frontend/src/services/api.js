@@ -40,7 +40,11 @@ export const taskAPI = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData)
     });
-    return res.json();
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.message || "Registration Failed");
+    }
+    return data;
   },
 
   // Login User
@@ -50,7 +54,11 @@ export const taskAPI = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials)
     });
-    return res.json();
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.message || "Login Failed");
+    }
+    return data;
   },
 
   // Get All Tasks

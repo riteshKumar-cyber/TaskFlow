@@ -20,7 +20,7 @@ function Login({ onLoginSuccess, onNavigateToRegister }) {
       setLoading(true);
 
       const data = await taskAPI.loginUser({
-        email,
+        email: email.trim(),
         password,
       });
 

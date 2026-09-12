@@ -31,20 +31,16 @@ function Register({
       setLoading(true);
 
       const data = await taskAPI.registerUser({
-        name,
-        email,
+        name: name.trim(),
+        email: email.trim(),
         password,
       });
 
       if (data.token) {
-        localStorage.setItem(
-          "token",
-          data.token
-        );
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data));
 
-        toast.success(
-          "Account Created Successfully "
-        );
+        toast.success("Account Created Successfully ");
 
         onRegisterSuccess();
       } else {

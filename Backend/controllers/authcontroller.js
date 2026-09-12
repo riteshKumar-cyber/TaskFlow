@@ -5,11 +5,17 @@ const generateToken = require("../utils/GenerateToken");
 
 const register = async (req, res) => {
   try {
-    const { name, email, password } =
-      req.body;
+    const { name, email, password } = req.body;
 
-    const userExists =
-      await User.findOne({ email });
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        message: "Please fill all required fields",
+      });
+    }
+
+    const cleanEmail = email.trim().toLowerCase();
+
+    const userExists = await User.findOne({ email: cleanEmail });
 
     if (userExists) {
       return res.status(400).json({
@@ -17,18 +23,21 @@ const register = async (req, res) => {
       });
     }
 
-    const hashedPassword =
-      await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await User.create({
-      name,
-      email,
+      name: name.trim(),
+      email: cleanEmail,
       password: hashedPassword,
     });
 
     res.status(201).json({
-      message: "User Registered",
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      profilePhoto: user.profilePhoto || "",
       token: generateToken(user._id),
+      message: "User Registered Successfully",
     });
   } catch (error) {
     res.status(500).json({
@@ -41,8 +50,15 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user =
-      await User.findOne({ email });
+    if (!email || !password) {
+      return res.status(400).json({
+        message: "Please provide email and password",
+      });
+    }
+
+    const cleanEmail = email.trim().toLowerCase();
+
+    const user = await User.findOne({ email: cleanEmail });
 
     if (!user) {
       return res.status(400).json({
@@ -50,11 +66,7 @@ const login = async (req, res) => {
       });
     }
 
-    const isMatch =
-      await bcrypt.compare(
-        password,
-        user.password
-      );
+    const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
       return res.status(400).json({
