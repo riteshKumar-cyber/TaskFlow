@@ -20,6 +20,7 @@ app.use(
       const isAllowed = 
         origin === "https://task-flow-ebvq.vercel.app" ||
         origin.endsWith(".vercel.app") ||
+        origin.endsWith(".onrender.com") ||
         /^http:\/\/localhost:\d+$/.test(origin) ||
         /^http:\/\/127\.0\.0\.1:\d+$/.test(origin);
 
