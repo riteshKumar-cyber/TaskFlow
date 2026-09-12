@@ -13,23 +13,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps, curl, postman)
-      if (!origin) return callback(null, true);
-      
-      const isAllowed = 
-        origin === "https://task-flow-ebvq.vercel.app" ||
-        origin.endsWith(".vercel.app") ||
-        origin.endsWith(".onrender.com") ||
-        /^http:\/\/localhost:\d+$/.test(origin) ||
-        /^http:\/\/127\.0\.0\.1:\d+$/.test(origin);
-
-      if (isAllowed) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: true,
     credentials: true,
   })
 );
