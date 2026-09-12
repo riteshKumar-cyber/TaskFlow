@@ -61,7 +61,7 @@ function TaskModal({ isOpen, onClose, editingTask, onSave }) {
         toast.success("AI suggestions generated successfully");
       }
     } catch (err) {
-      toast.error("Failed to generate AI suggestions");
+      toast.error(err.message || "Failed to generate AI suggestions");
       console.error("AI service failure:", err);
     } finally {
       setAiLoading(false);

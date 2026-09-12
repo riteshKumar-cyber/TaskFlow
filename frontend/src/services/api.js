@@ -111,14 +111,17 @@ export const taskAPI = {
   },
 
   // AI Suggestion for Estimate
-  // AI Suggestion for Estimate
   getAIEstimate: async (description, currentDate) => {
     const res = await fetch(`${BASE_URL}/ai/suggest`, {
       method: "POST",
       headers: getHeaders(),
       body: JSON.stringify({ description, currentDate })
     });
-    return res.json();
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.message || "Failed to generate AI suggestions");
+    }
+    return data;
   },
 
   // Update Password
