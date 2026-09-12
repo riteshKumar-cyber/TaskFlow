@@ -1,5 +1,15 @@
-// Backend Base URL
-const BASE_URL = `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api`;
+// Backend Base URL with automatic production fallback for Render
+const getBaseUrl = () => {
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+  if (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+    return "https://taskflow-backend-ebz5.onrender.com";
+  }
+  return "http://localhost:5000";
+};
+
+const BASE_URL = `${getBaseUrl()}/api`;
 
 // Helper function to get headers with the auth token
 const getHeaders = () => {
