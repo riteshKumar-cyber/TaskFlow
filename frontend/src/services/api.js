@@ -1,12 +1,23 @@
 // Backend Base URL with automatic production fallback for Render
 const getBaseUrl = () => {
-  if (import.meta.env.VITE_API_URL) {
-    return import.meta.env.VITE_API_URL;
+  let url = import.meta.env.VITE_API_URL;
+
+  // If online in browser, override localhost defaults or empty URL with live Render Backend
+  const isOnline = typeof window !== "undefined" && 
+                   window.location.hostname !== "localhost" && 
+                   window.location.hostname !== "127.0.0.1";
+
+  if (isOnline) {
+    if (!url || url.includes("localhost") || url.includes("127.0.0.1")) {
+      url = "https://taskflow-backend-ebz5.onrender.com";
+    }
   }
-  if (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
-    return "https://taskflow-backend-ebz5.onrender.com";
+
+  if (!url) {
+    url = "http://localhost:5000";
   }
-  return "http://localhost:5000";
+
+  return url.replace(/\/+$/, "");
 };
 
 const BASE_URL = `${getBaseUrl()}/api`;
