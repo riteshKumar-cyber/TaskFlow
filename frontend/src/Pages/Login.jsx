@@ -38,10 +38,10 @@ function Login({ onLoginSuccess, onNavigateToRegister }) {
         throw new Error(data.message || "Login Failed");
       }
     } catch (error) {
-      toast.error(
-        error.message ||
-        "Login Failed"
-      );
+      const errMsg = error.message === "Failed to fetch" 
+        ? "Unable to connect to Backend server! Please check backend URL & Render Environment Variables." 
+        : (error.message || "Login Failed");
+      toast.error(errMsg);
     } finally {
       setLoading(false);
     }

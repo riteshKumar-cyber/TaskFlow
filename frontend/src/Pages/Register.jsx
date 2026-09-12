@@ -45,12 +45,11 @@ function Register({
         onRegisterSuccess();
       } else {
         throw new Error(data.message || "Registration Failed");
-      }
     } catch (error) {
-      toast.error(
-        error.message ||
-        "Registration Failed"
-      );
+      const errMsg = error.message === "Failed to fetch" 
+        ? "Unable to connect to Backend server! Please check backend URL & Render Environment Variables." 
+        : (error.message || "Registration Failed");
+      toast.error(errMsg);
     } finally {
       setLoading(false);
     }
