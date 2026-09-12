@@ -45,6 +45,7 @@ function Register({
         onRegisterSuccess();
       } else {
         throw new Error(data.message || "Registration Failed");
+      }
     } catch (error) {
       const errMsg = error.message === "Failed to fetch" 
         ? "Unable to connect to Backend server! Please check backend URL & Render Environment Variables." 
